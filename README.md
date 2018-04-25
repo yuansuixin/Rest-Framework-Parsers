@@ -1,7 +1,5 @@
 
 
-
-
 # 解析器
 
 ### 1. 知识点补充，Django的解析
@@ -43,43 +41,6 @@
 
 ### 2.rest framework的解析器，对请求体数据进行解析
 - 使用，原理和认证，权限等组件相似，推荐使用全局配置
-
-```
-REST_FRAMEWORK = {
-    'DEFAULT_PARSER_CLASSES':['rest_framework.parsers.JSONParser','rest_framework.parsers.FormParser'],
-}
-
-```
-
-```
-class ParserView(APIView):
-    # parser_classes = [JSONParser,FormParser]
-    # JSONParser:表示只能解析content-type:application/json头
-    #FormParser：表示只能解析content-type:application/x-www-form-urlencoded头
-    def post(self,request,*args,**kwargs):
-        """
-        解析： 就是把请求体的内容转换成你可以看的格式
-        允许用户发送JSON格式数据，可以接收json的那个头发来的数据，也可以接收字典格式的数据
-        1，content-type:application/json
-        2，{'name':'alex','age':18}
-        :param request:
-        :param args:
-        :param kwargs:
-        :return:
-        """
-        """
-        只有用到的时候才会解析，这里使用到了data,所以由request.data触发
-        解析：
-        1.获取用户的请求
-        2.获取用户的请求体
-        3.根据用户请求头 和 parser_classes = [JSONParser,FormParser]中支持的请求头进行比较
-        4.JSONParser符合，就是用JSONParser对象去请求体
-        5.将解析的数据赋值给request.data
-       """
-        print(request.data)
-        return HttpResponse('ParserView')
-    
-```
 
 
 - 源码流程 和 本质
